@@ -6,6 +6,7 @@ let {log, slow} = myutil;
 
 // -------------------------------------------
 log('app.js starts');
+const port = process.env.PORT || 5000;
 let app = express();
 // assign the handlebars engine to .html files
 app.engine('hbs', cons.handlebars);
@@ -16,9 +17,9 @@ app.use((req, res, next) => (log(new Date().toString(), '\nreq.id is', req.id, '
 commonPartials = {about: __dirname + '/views/partials/about'};
 commonHelpers = {getCurrentYear: function(){return new Date().getFullYear();}, addOne: function(num) {return num++}}
 
-app.get('/about', (req, res) => {
+app.get('/', (req, res) => {
     res.render('index', {getCurrentYear:20, partials: Object.assign({}, commonPartials), helpers: Object.assign({}, commonHelpers)}) ;
 }) 
-app.listen(5000);
+app.listen(port);
 
 log('app.js ends');
